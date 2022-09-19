@@ -11,28 +11,26 @@ namespace API.Data
     {
         public DataContext()
         {
-            
         }
+
         public DataContext(DbContextOptions options) : base(options)
         {
         }
 
-        public DbSet<AppUser> Users {get; set;}
+        public DbSet<AppUser> Users { get; set; }
 
 
-
-                protected override void OnConfiguring(DbContextOptionsBuilder x)
+        protected override void OnConfiguring(DbContextOptionsBuilder x)
+        {
+            if (!x.IsConfigured)
             {
-                if (!x.IsConfigured)
-                {
-                    x.UseSqlite("ConnectionStrings");
-                }
+                x.UseSqlite("ConnectionStrings");
             }
-            
-            protected override void OnModelCreating(ModelBuilder modelBuilder)
-            {
-                base.OnModelCreating(modelBuilder);            
-            }
-    
+        }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+        }
     }
 }
