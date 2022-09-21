@@ -5,8 +5,10 @@ using System.Net;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 using System.Text.Json; 
-using API.Errors; 
-
+using API.Errors;
+using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
 
 
 namespace API.Middleware

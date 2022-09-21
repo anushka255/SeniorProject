@@ -1,57 +1,25 @@
-var builder = WebApplication.CreateBuilder(args);
+using API.Data;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 
-// Add services to the container.
-
-builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
-
-var app = builder.Build();
-
-// Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
+namespace API
 {
-    app.UseSwagger();
-    app.UseSwaggerUI();
+    public static class Program
+    {
+        public static void Main(string[] args)
+        {
+            CreateHostBuilder(args).Build().Run();
+        }
+
+        private static IHostBuilder CreateHostBuilder(string[] args)
+        {
+            var builder = Host.CreateDefaultBuilder(args)
+                .ConfigureWebHostDefaults(webBuilder => { webBuilder.UseStartup<Startup>(); });
+
+            return builder;
+        }
+    }
 }
-
-app.UseHttpsRedirection();
-
-app.UseCors(x => x.AllowAnyHeader()
-    .AllowAnyMethod()
-    .AllowCredentials()
-    .WithOrigins("https://localhost:4200"));
-
-app.UseAuthorization();
-
-app.MapControllers();
-
-app.Run();
-
-// using System;
-// using System.Collections.Generic;
-// using System.Linq;
-// using System.Threading.Tasks;
-// using Microsoft.AspNetCore.Hosting;
-// using Microsoft.Extensions.Configuration;
-// using Microsoft.Extensions.Hosting;
-// using Microsoft.Extensions.Logging;
-
-// namespace API
-// {
-//     public class Program
-//     {
-//         public static void Main(string[] args)
-//         {
-//             CreateHostBuilder(args).Build().Run();
-//         }
-
-//         public static IHostBuilder CreateHostBuilder(string[] args) =>
-//             Host.CreateDefaultBuilder(args)
-//                 .ConfigureWebHostDefaults(webBuilder =>
-//                 {
-//                     webBuilder.UseStartup<Startup>();
-//                 });
-//     }
-// }
